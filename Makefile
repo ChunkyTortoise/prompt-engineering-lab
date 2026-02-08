@@ -1,17 +1,23 @@
-.PHONY: demo test lint clean setup
+.PHONY: test lint format install clean
 
-demo:
-	streamlit run app.py
+install:
+	pip install -e ".[dev]"
 
 test:
-	python -m pytest tests/ -v
+	python -m pytest tests/ -v --tb=short
+
+coverage:
+	python -m pytest tests/ --cov=prompt_engineering_lab --cov-report=term-missing
 
 lint:
-	ruff check . && ruff format --check .
+	python -m ruff check .
+	python -m ruff format --check .
+
+format:
+	python -m ruff format .
+	python -m ruff check --fix .
 
 clean:
-	find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null; true
-	find . -type f -name "*.pyc" -delete 2>/dev/null; true
-
-setup:
-	pip install -r requirements-dev.txt
+	find . -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true
+	find . -type f -name "*.pyc" -delete
+	rm -rf .pytest_cache .ruff_cache .coverage htmlcov dist build *.egg-info
