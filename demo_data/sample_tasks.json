@@ -1,0 +1,255 @@
+[
+  {
+    "category": "classification",
+    "name": "sentiment_positive",
+    "input": "This product exceeded my expectations. Absolutely love it!",
+    "expected_output": "positive",
+    "expected_topics": ["sentiment", "positive"]
+  },
+  {
+    "category": "classification",
+    "name": "sentiment_negative",
+    "input": "Terrible experience. The product broke after one day.",
+    "expected_output": "negative",
+    "expected_topics": ["sentiment", "negative"]
+  },
+  {
+    "category": "classification",
+    "name": "sentiment_mixed",
+    "input": "Great features but the price is way too high for what you get.",
+    "expected_output": "mixed",
+    "expected_topics": ["sentiment", "positive", "negative"]
+  },
+  {
+    "category": "classification",
+    "name": "ticket_billing",
+    "input": "I was charged twice for my subscription this month. Please refund.",
+    "expected_output": "billing",
+    "expected_topics": ["category", "billing", "refund"]
+  },
+  {
+    "category": "classification",
+    "name": "ticket_technical",
+    "input": "The app crashes every time I try to upload a file larger than 10MB.",
+    "expected_output": "technical",
+    "expected_topics": ["category", "technical", "bug"]
+  },
+  {
+    "category": "extraction",
+    "name": "contact_full",
+    "input": "Reach out to Sarah Johnson at sarah.j@company.com or call 415-555-0199.",
+    "expected_output": "{\"name\": \"Sarah Johnson\", \"email\": \"sarah.j@company.com\", \"phone\": \"415-555-0199\"}",
+    "expected_topics": ["name", "email", "phone"]
+  },
+  {
+    "category": "extraction",
+    "name": "address_extraction",
+    "input": "Ship to: 123 Main Street, Suite 400, San Francisco, CA 94105",
+    "expected_output": "{\"street\": \"123 Main Street, Suite 400\", \"city\": \"San Francisco\", \"state\": \"CA\", \"zip\": \"94105\"}",
+    "expected_topics": ["street", "city", "state", "zip"]
+  },
+  {
+    "category": "extraction",
+    "name": "price_extraction",
+    "input": "The base plan starts at $29/month, pro plan is $79/month, enterprise is custom pricing.",
+    "expected_output": "{\"base\": 29, \"pro\": 79, \"enterprise\": \"custom\"}",
+    "expected_topics": ["base", "pro", "enterprise", "pricing"]
+  },
+  {
+    "category": "extraction",
+    "name": "date_multi",
+    "input": "Project kicks off Jan 15 2026, milestone review on Feb 28, final delivery by March 31.",
+    "expected_output": "{\"kickoff\": \"2026-01-15\", \"milestone\": \"2026-02-28\", \"delivery\": \"2026-03-31\"}",
+    "expected_topics": ["kickoff", "milestone", "delivery"]
+  },
+  {
+    "category": "extraction",
+    "name": "skill_extraction",
+    "input": "Looking for a developer with Python, React, PostgreSQL, and Docker experience.",
+    "expected_output": "[\"Python\", \"React\", \"PostgreSQL\", \"Docker\"]",
+    "expected_topics": ["Python", "React", "PostgreSQL", "Docker"]
+  },
+  {
+    "category": "generation",
+    "name": "cold_email",
+    "input": "Write a cold outreach email to a SaaS company about our AI consulting services.",
+    "expected_output": "Subject: Boost Your SaaS with AI-Powered Automation...",
+    "expected_topics": ["introduction", "value proposition", "call to action"]
+  },
+  {
+    "category": "generation",
+    "name": "product_description",
+    "input": "Write a product description for a noise-canceling wireless headphone under $100.",
+    "expected_output": "Experience studio-quality sound without the studio price...",
+    "expected_topics": ["features", "price", "quality"]
+  },
+  {
+    "category": "generation",
+    "name": "meeting_agenda",
+    "input": "Create a meeting agenda for a Q1 planning session with the engineering team.",
+    "expected_output": "Q1 Engineering Planning Meeting Agenda...",
+    "expected_topics": ["objectives", "timeline", "action items"]
+  },
+  {
+    "category": "generation",
+    "name": "social_post",
+    "input": "Write a LinkedIn post announcing our Series A funding of $10M.",
+    "expected_output": "Thrilled to announce our $10M Series A...",
+    "expected_topics": ["announcement", "funding", "future plans"]
+  },
+  {
+    "category": "summarization",
+    "name": "earnings_summary",
+    "input": "Summarize: Q4 revenue $2.3B (+12% YoY), operating margin 28%, new subscriber growth 15%, guidance raised for FY2026.",
+    "expected_output": "Strong Q4 with $2.3B revenue (12% growth), healthy 28% margins, 15% subscriber growth, and raised full-year guidance.",
+    "expected_topics": ["revenue", "growth", "guidance"],
+    "context": "Q4 earnings report with revenue $2.3B up 12% year over year. Operating margin at 28%. New subscriber growth of 15%. Company raised guidance for fiscal year 2026."
+  },
+  {
+    "category": "summarization",
+    "name": "research_abstract",
+    "input": "Summarize this ML paper abstract about transformer attention mechanisms and their computational complexity.",
+    "expected_output": "The paper proposes a linear attention mechanism reducing transformer complexity from O(n^2) to O(n).",
+    "expected_topics": ["attention", "complexity", "transformer"],
+    "context": "We propose a novel linear attention mechanism that reduces the computational complexity of standard transformer attention from quadratic to linear in sequence length."
+  },
+  {
+    "category": "summarization",
+    "name": "legal_summary",
+    "input": "Summarize the key terms of this SaaS agreement.",
+    "expected_output": "12-month term, auto-renewal, 30-day cancellation notice, 99.9% SLA, data processing per GDPR.",
+    "expected_topics": ["term", "cancellation", "SLA"],
+    "context": "Agreement term is 12 months with automatic renewal. Either party may cancel with 30 days written notice. Service level agreement guarantees 99.9% uptime. Data processing compliant with GDPR."
+  },
+  {
+    "category": "qa",
+    "name": "hr_policy",
+    "input": "How many vacation days do new employees get?",
+    "expected_output": "New employees receive 15 vacation days per year, increasing to 20 after 3 years.",
+    "expected_topics": ["vacation", "days", "new employees"],
+    "context": "Vacation Policy: New employees receive 15 vacation days annually. After 3 years of service, this increases to 20 days. After 7 years, employees receive 25 days."
+  },
+  {
+    "category": "qa",
+    "name": "product_faq",
+    "input": "Does the premium plan include API access?",
+    "expected_output": "Yes, the premium plan includes full API access with a rate limit of 1000 requests per minute.",
+    "expected_topics": ["API", "premium", "rate limit"],
+    "context": "Plan Features: Basic - no API access. Premium - full API access, 1000 req/min. Enterprise - unlimited API access with dedicated endpoints."
+  },
+  {
+    "category": "qa",
+    "name": "shipping_info",
+    "input": "How long does international shipping take?",
+    "expected_output": "International shipping takes 7-14 business days depending on destination.",
+    "expected_topics": ["international", "shipping", "days"],
+    "context": "Shipping: Domestic orders ship within 2-3 business days. International orders take 7-14 business days. Express international available for 3-5 business days at additional cost."
+  },
+  {
+    "category": "qa",
+    "name": "warranty_question",
+    "input": "What does the warranty cover?",
+    "expected_output": "The warranty covers manufacturing defects for 2 years from purchase date.",
+    "expected_topics": ["warranty", "defects", "years"],
+    "context": "Warranty: All products carry a 2-year warranty from date of purchase covering manufacturing defects. Physical damage and normal wear are not covered. Extended warranty available for purchase."
+  },
+  {
+    "category": "analysis",
+    "name": "churn_analysis",
+    "input": "Analyze factors contributing to customer churn in our Q4 data.",
+    "expected_output": "Key churn drivers: pricing sensitivity (35%), feature gaps (25%), support quality (20%), competitor switching (20%).",
+    "expected_topics": ["churn", "factors", "pricing", "competitors"]
+  },
+  {
+    "category": "analysis",
+    "name": "cost_optimization",
+    "input": "Analyze our cloud infrastructure costs and identify optimization opportunities.",
+    "expected_output": "Top savings: right-size instances (30% savings), reserved capacity (20%), unused resources cleanup (15%).",
+    "expected_topics": ["cost", "optimization", "savings"]
+  },
+  {
+    "category": "analysis",
+    "name": "competitor_pricing",
+    "input": "Compare pricing strategies of the top 3 project management tools.",
+    "expected_output": "Asana starts at $10.99/user, Monday.com at $8/user, Jira at $7.75/user with different feature tiers.",
+    "expected_topics": ["pricing", "comparison", "features"]
+  },
+  {
+    "category": "analysis",
+    "name": "performance_review",
+    "input": "Analyze API response time trends over the last quarter.",
+    "expected_output": "P50 improved 15% to 120ms, P99 degraded 8% to 890ms, suggesting tail latency issues.",
+    "expected_topics": ["latency", "trends", "performance"]
+  },
+  {
+    "category": "transformation",
+    "name": "json_to_csv",
+    "input": "[{\"product\": \"Widget A\", \"price\": 29.99}, {\"product\": \"Widget B\", \"price\": 49.99}]",
+    "expected_output": "product,price\nWidget A,29.99\nWidget B,49.99",
+    "expected_topics": ["product", "price"]
+  },
+  {
+    "category": "transformation",
+    "name": "formal_to_casual",
+    "input": "Transform: 'We regret to inform you that your application has been unsuccessful at this time.'",
+    "expected_output": "Sorry, your application wasn't successful this time around.",
+    "expected_topics": ["application", "unsuccessful"]
+  },
+  {
+    "category": "transformation",
+    "name": "sql_to_natural",
+    "input": "Explain: SELECT u.name, COUNT(o.id) FROM users u JOIN orders o ON u.id = o.user_id GROUP BY u.name HAVING COUNT(o.id) > 5",
+    "expected_output": "Get user names and their order counts, but only for users with more than 5 orders.",
+    "expected_topics": ["users", "orders", "count"]
+  },
+  {
+    "category": "transformation",
+    "name": "markdown_to_html",
+    "input": "Convert: # Title\n- Item 1\n- Item 2\n**bold text**",
+    "expected_output": "<h1>Title</h1><ul><li>Item 1</li><li>Item 2</li></ul><strong>bold text</strong>",
+    "expected_topics": ["title", "list", "bold"]
+  },
+  {
+    "category": "transformation",
+    "name": "units_conversion",
+    "input": "Convert: Temperature is 72F, distance is 5 miles, weight is 150 lbs.",
+    "expected_output": "Temperature is 22.2C, distance is 8.05 km, weight is 68.04 kg.",
+    "expected_topics": ["temperature", "distance", "weight"]
+  },
+  {
+    "category": "classification",
+    "name": "intent_detection",
+    "input": "I'd like to cancel my subscription and get a refund for the remaining months.",
+    "expected_output": "cancellation_with_refund",
+    "expected_topics": ["intent", "cancellation", "refund"]
+  },
+  {
+    "category": "extraction",
+    "name": "meeting_notes",
+    "input": "Action items from today: John to finish API docs by Friday. Sarah to review PRs. Team to present demo next Tuesday.",
+    "expected_output": "[{\"owner\": \"John\", \"task\": \"finish API docs\", \"deadline\": \"Friday\"}, {\"owner\": \"Sarah\", \"task\": \"review PRs\"}, {\"owner\": \"Team\", \"task\": \"present demo\", \"deadline\": \"next Tuesday\"}]",
+    "expected_topics": ["owner", "task", "deadline"]
+  },
+  {
+    "category": "qa",
+    "name": "technical_docs",
+    "input": "What are the system requirements for installation?",
+    "expected_output": "Minimum requirements: Python 3.11+, 4GB RAM, 2GB disk space.",
+    "expected_topics": ["Python", "RAM", "disk"],
+    "context": "System Requirements: Python 3.11 or higher. Minimum 4GB RAM. At least 2GB free disk space. Supported OS: Linux, macOS, Windows 10+."
+  },
+  {
+    "category": "generation",
+    "name": "error_message",
+    "input": "Write a user-friendly error message for a 429 rate limit exceeded response.",
+    "expected_output": "You're making requests too quickly. Please wait a moment and try again.",
+    "expected_topics": ["rate limit", "wait", "try again"]
+  },
+  {
+    "category": "analysis",
+    "name": "ab_test_analysis",
+    "input": "Analyze A/B test results: Variant A (1000 users, 5.2% conversion) vs Variant B (1000 users, 6.1% conversion).",
+    "expected_output": "Variant B shows 17.3% relative improvement. With n=1000 per variant, this is likely statistically significant at p<0.05.",
+    "expected_topics": ["conversion", "significant", "improvement"]
+  }
+]
