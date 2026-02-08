@@ -1,150 +1,262 @@
 # Prompt Engineering Lab
 
-**A prompt engineering framework with 8 reusable patterns, 7 business task categories, TF-IDF evaluation metrics, z-test A/B testing, and reproducible benchmarks.**
+A comprehensive Python toolkit for prompt engineering techniques — template management, patterns (CoT, few-shot, role-play), optimization, A/B testing, token counting, and cost estimation.
 
-![CI](https://github.com/ChunkyTortoise/prompt-engineering-lab/actions/workflows/ci.yml/badge.svg)
-![Python](https://img.shields.io/badge/python-3.11%20%7C%203.12-blue)
-![Tests](https://img.shields.io/badge/tests-67%20passing-brightgreen)
-![License](https://img.shields.io/badge/license-MIT-green)
+![Tests](https://img.shields.io/badge/tests-66%2B%20passing-brightgreen)
+![Python](https://img.shields.io/badge/python-3.11%2B-blue)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
-## What This Solves
+## Features
 
-- **No systematic way to compare prompts** -- A/B testing with z-test significance tells you which prompt performs better
-- **Prompt quality is subjective** -- TF-IDF scoring measures faithfulness, relevance, and completeness (0-1)
-- **Prompt patterns are scattered** -- 8 battle-tested patterns in one library with templates and examples
+- **Template Management**: Create, store, and chain prompt templates with variable substitution
+- **Prompt Patterns**: Apply proven patterns like Chain-of-Thought, Few-Shot, Role-Play, and Self-Refine
+- **Optimization**: Improve prompts through random search and mutation strategies
+- **A/B Testing**: Compare template effectiveness with statistical significance testing
+- **Token Counting**: Estimate token usage across Claude, OpenAI, and Gemini
+- **Cost Calculation**: Calculate and compare costs across different AI providers and models
+- **CLI Tool**: Command-line interface for quick prompt engineering workflows
 
-## Architecture
+## Installation
 
+```bash
+# Clone the repository
+git clone https://github.com/ChunkyTortoise/prompt-engineering-lab.git
+cd prompt-engineering-lab
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Install in development mode
+pip install -e ".[dev]"
 ```
-+-------------------+    +------------------+    +------------------+
-|  Pattern Library  |--->|    Evaluator     |--->| Report Generator |
-|  8 built-in      |    |  TF-IDF scoring  |    |  Markdown tables |
-|  patterns         |    |  faithfulness,   |    |  comparison      |
-+-------------------+    |  relevance,      |    +------------------+
-                         |  completeness    |
-+-------------------+    +--------+---------+
-|   Categories     |              |
-|  7 business task |    +---------v--------+
-|  types + samples |    |    A/B Tester    |
-+-------------------+    |  z-test, lift,   |
-                         |  significance    |
-+-------------------+    +------------------+
-|   Benchmark      |
-|  all patterns x  |
-|  all categories  |
-+-------------------+
-```
-
-## Modules
-
-| Module | File | Description |
-|--------|------|-------------|
-| **Pattern Library** | `patterns.py` | 8 prompt patterns with templates, descriptions, and examples |
-| **Evaluator** | `evaluator.py` | TF-IDF faithfulness, relevance, and completeness scoring (0-1) |
-| **Benchmark** | `benchmark.py` | Reproducible benchmark runner with mock outputs across all combos |
-| **Categories** | `categories.py` | 7 business task categories with sample tasks |
-| **A/B Tester** | `ab_tester.py` | Z-test comparison with significance testing and lift calculation |
-| **Report Generator** | `report_generator.py` | Markdown report and comparison table generation |
-
-## 8 Prompt Patterns
-
-| Pattern | Best For |
-|---------|----------|
-| Chain of Thought | Complex problems, math, step-by-step reasoning |
-| Few-Shot | Classification, formatting, learning from examples |
-| Structured Output | Data extraction, specific format (JSON, table) |
-| Role Play | Creative tasks, code review, persona-based generation |
-| Tool Use | Agent workflows, function calling instructions |
-| Self-Consistency | Reliability-critical tasks, consensus from multiple answers |
-| RAG | Q&A with source material, context-grounded generation |
-| Decomposition | Planning, complex projects, break into subtasks |
 
 ## Quick Start
 
-```bash
-git clone https://github.com/ChunkyTortoise/prompt-engineering-lab.git
-cd prompt-engineering-lab
-pip install -r requirements-dev.txt
-make test
-make demo
-```
-
-## Usage
+### Python API
 
 ```python
-from prompt_lab import PromptEvaluator, ABTester
+from prompt_engineering_lab import PromptTemplate, ChainOfThought, PromptOptimizer
 
-# Evaluate a prompt output (faithfulness, relevance, completeness)
-evaluator = PromptEvaluator()
-result = evaluator.evaluate(
-    output="Electronics can be returned within 30 days.",
-    query="What is the return policy?",
-    context="Return policy: 30 days for electronics.",
-    expected_topics=["return", "days", "electronics"],
+# Create a template
+template = PromptTemplate(
+    name="summarize",
+    template="Summarize the following text in {word_count} words:\n\n{text}"
 )
-print(f"Overall: {result.overall:.2%}")
 
-# A/B test two prompt strategies
-tester = ABTester()
-ab = tester.compare(scores_a=[0.85, 0.90], scores_b=[0.70, 0.72],
-                    name_a="chain_of_thought", name_b="zero_shot")
-print(f"Winner: {ab.winner} (lift: {ab.lift:.1f}%)")
+# Format with variables
+result = template.format(word_count="50", text="Long article...")
+
+# Apply Chain-of-Thought pattern
+cot = ChainOfThought()
+enhanced = cot.apply("Explain quantum computing")
+# Output: "Let's think step by step.\n\nExplain quantum computing"
+
+# Optimize prompts
+optimizer = PromptOptimizer(scorer=lambda x: len(x))
+result = optimizer.optimize("Write a blog post", n_iterations=20)
+print(f"Best template: {result.best_template}")
+print(f"Improvement: {result.improvement_pct}%")
 ```
 
-## Streamlit Dashboard
+### CLI Usage
 
-Four interactive tabs:
+```bash
+# List available templates
+pel list
 
-1. **Pattern Library** -- Browse and preview all 8 patterns with examples
-2. **Evaluate** -- Score any prompt output for faithfulness, relevance, completeness
-3. **A/B Compare** -- Compare two patterns on category tasks with statistical significance
-4. **Benchmarks** -- Run all patterns against all categories and view ranked results
+# Test a template
+pel test summarize "Your text here" -v word_count=50
 
-## Tech Stack
+# Enhance a prompt with patterns
+pel enhance "Explain AI" -p cot
+pel enhance "Write code" -p role --role "senior developer" --expertise "Python"
 
-| Layer | Technology |
-|-------|-----------|
-| UI | Streamlit |
-| Evaluation | scikit-learn (TF-IDF cosine similarity) |
-| Statistics | scipy (z-test) |
-| Testing | pytest (67 tests) |
-| CI | GitHub Actions (Python 3.11, 3.12) |
-| Linting | Ruff |
+# Compare two templates
+pel compare "Template A" "Template B" "input text"
+
+# Count tokens
+pel count "Your prompt text" -p claude
+```
+
+## Module Overview
+
+### Template Management (`template.py`)
+- `PromptTemplate`: Define reusable templates with variable placeholders
+- `PromptChain`: Chain multiple templates for sequential execution
+- `TemplateRegistry`: Store and retrieve templates with 4 builtin templates
+
+### Patterns (`patterns.py`)
+- `ChainOfThought`: Add step-by-step reasoning guidance
+- `FewShotPattern`: Include examples in prompts
+- `RolePlayPattern`: Add persona and expertise context
+- `SelfRefinePattern`: Generate → critique → refine workflow
+- `MetaPromptPattern`: Create prompts that generate prompts
+
+### Optimization (`optimizer.py`)
+- `PromptOptimizer`: Improve prompts through search and mutation
+- Random search over template candidates
+- Mutation strategies: word swapping, emphasis, reordering
+- Track optimization history and improvement metrics
+
+### A/B Testing (`ab_tester.py`)
+- `ABTestRunner`: Compare two templates statistically
+- Z-test for significance (p < 0.05 threshold)
+- Effect size calculation (Cohen's d)
+- Winner determination with confidence metrics
+
+### Token Counting (`token_counter.py`)
+- `TokenCounter`: Estimate tokens for Claude, OpenAI, Gemini
+- Message-level counting with overhead calculation
+- Provider-specific character-per-token ratios
+
+### Cost Calculation (`cost_calculator.py`)
+- `CostCalculator`: Estimate API costs across providers
+- Pricing data for Claude (Opus/Sonnet/Haiku), OpenAI (GPT-4/3.5), Gemini (Pro/Ultra)
+- Compare providers to find the most cost-effective option
+
+## Development
+
+```bash
+# Run tests
+make test
+
+# Run tests with coverage
+make coverage
+
+# Lint code
+make lint
+
+# Format code
+make format
+
+# Clean build artifacts
+make clean
+```
+
+## Testing
+
+The project includes 66+ comprehensive tests covering all modules:
+
+- **Template tests** (12): Template formatting, chaining, registry
+- **Pattern tests** (14): CoT, few-shot, role-play, self-refine
+- **Optimizer tests** (10): Random search, mutation, optimization
+- **A/B testing tests** (10): Statistical testing, winner determination
+- **Token counter tests** (8): Multi-provider counting, messages
+- **Cost calculator tests** (6): Cost estimation, provider comparison
+- **CLI tests** (6): Command-line interface functionality
+
+Run tests:
+```bash
+pytest tests/ -v
+pytest tests/ --cov=prompt_engineering_lab --cov-report=term-missing
+```
 
 ## Project Structure
 
 ```
 prompt-engineering-lab/
-├── app.py                          # Streamlit dashboard (4 tabs)
-├── prompt_lab/
-│   ├── patterns.py                 # 8 prompt patterns
-│   ├── evaluator.py                # TF-IDF scoring engine
-│   ├── benchmark.py                # Benchmark runner
-│   ├── categories.py               # 7 business task categories
-│   ├── ab_tester.py                # Z-test A/B comparison
-│   └── report_generator.py         # Markdown report generation
-├── tests/                          # 6 test files, one per module
-├── .github/workflows/ci.yml        # CI pipeline
-├── Makefile                        # demo, test, lint, setup
-└── requirements-dev.txt
+├── prompt_engineering_lab/
+│   ├── __init__.py           # Package exports
+│   ├── template.py           # Template management
+│   ├── patterns.py           # Prompt patterns
+│   ├── optimizer.py          # Optimization strategies
+│   ├── ab_tester.py          # A/B testing framework
+│   ├── token_counter.py      # Token counting
+│   ├── cost_calculator.py    # Cost estimation
+│   └── cli.py                # Command-line interface
+├── tests/
+│   ├── conftest.py           # Pytest fixtures
+│   ├── test_template.py
+│   ├── test_patterns.py
+│   ├── test_optimizer.py
+│   ├── test_ab_tester.py
+│   ├── test_token_counter.py
+│   ├── test_cost_calculator.py
+│   └── test_cli.py
+├── pyproject.toml            # Project configuration
+├── Makefile                  # Development commands
+├── requirements.txt          # Production dependencies
+├── requirements-dev.txt      # Development dependencies
+└── README.md                 # This file
 ```
 
-## Testing
+## Examples
 
-```bash
-make test                           # Full suite (67 tests)
-python -m pytest tests/ -v          # Verbose output
+### Template Chaining
+
+```python
+from prompt_engineering_lab import PromptTemplate, PromptChain
+
+# Define chain steps
+step1 = PromptTemplate(name="outline", template="Create an outline for: {topic}")
+step2 = PromptTemplate(name="expand", template="Expand on this outline: {previous_output}")
+
+# Execute chain
+chain = PromptChain(templates=[step1, step2])
+results = chain.run({"topic": "Machine Learning"})
 ```
 
-## Related Projects
+### A/B Testing
 
-- [EnterpriseHub](https://github.com/ChunkyTortoise/EnterpriseHub) -- Real estate AI platform with BI dashboards and CRM integration
-- [docqa-engine](https://github.com/ChunkyTortoise/docqa-engine) -- RAG document Q&A with hybrid retrieval and prompt engineering lab
-- [ai-orchestrator](https://github.com/ChunkyTortoise/ai-orchestrator) -- AgentForge: unified async LLM interface (Claude, Gemini, OpenAI, Perplexity)
-- [insight-engine](https://github.com/ChunkyTortoise/insight-engine) -- Upload CSV/Excel, get instant dashboards, predictive models, and reports
-- [scrape-and-serve](https://github.com/ChunkyTortoise/scrape-and-serve) -- Web scraping, price monitoring, Excel-to-web apps, and SEO tools
-- [llm-integration-starter](https://github.com/ChunkyTortoise/llm-integration-starter) -- Production LLM patterns: completion, streaming, function calling, RAG, hardening
-- [Portfolio](https://chunkytortoise.github.io) -- Project showcase and services
+```python
+from prompt_engineering_lab import ABTestRunner
+
+# Define scorer (e.g., response quality)
+def scorer(template):
+    # Your scoring logic here
+    return len(template)  # Simplified example
+
+# Run A/B test
+runner = ABTestRunner(scorer=scorer)
+result = runner.run(
+    template_a="Explain {topic} concisely.",
+    template_b="Provide a detailed explanation of {topic}.",
+    inputs=["AI", "blockchain", "quantum"]
+)
+
+print(f"Winner: {result.winner}")
+print(f"P-value: {result.p_value}")
+print(f"Effect size: {result.effect_size}")
+```
+
+### Cost Optimization
+
+```python
+from prompt_engineering_lab import TokenCounter, CostCalculator
+
+# Count tokens
+counter = TokenCounter()
+input_tokens = counter.count("Your prompt here", provider="claude")
+output_tokens = 500  # Expected output
+
+# Compare providers
+calc = CostCalculator()
+estimates = calc.compare_providers(input_tokens, output_tokens)
+
+for est in estimates[:3]:  # Top 3 cheapest
+    print(f"{est.provider} {est.model}: ${est.total_cost:.4f}")
+```
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## License
-MIT License. Copyright 2026 Cayman Roden.
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) file for details.
+
+## Author
+
+**ChunkyTortoise**
+
+## Acknowledgments
+
+- Inspired by modern prompt engineering research and best practices
+- Built with Python 3.11+ and Click for CLI functionality
+- Follows test-driven development with 66+ comprehensive tests
