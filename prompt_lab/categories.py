@@ -63,17 +63,13 @@ class CategoryRegistry:
                     TaskExample(
                         name="contact_extraction",
                         input_text="Call John at 555-0123 or email john@example.com",
-                        expected_output=(
-                            '{"name": "John", "phone": "555-0123", "email": "john@example.com"}'
-                        ),
+                        expected_output=('{"name": "John", "phone": "555-0123", "email": "john@example.com"}'),
                         expected_topics=["name", "phone", "email"],
                     ),
                     TaskExample(
                         name="date_extraction",
                         input_text=("The meeting is scheduled for March 15, 2026 at 2pm EST."),
-                        expected_output=(
-                            '{"date": "2026-03-15", "time": "14:00", "timezone": "EST"}'
-                        ),
+                        expected_output=('{"date": "2026-03-15", "time": "14:00", "timezone": "EST"}'),
                         expected_topics=["date", "time"],
                     ),
                 ],
@@ -85,9 +81,7 @@ class CategoryRegistry:
                 examples=[
                     TaskExample(
                         name="email_draft",
-                        input_text=(
-                            "Write a follow-up email after a sales call about our SaaS product."
-                        ),
+                        input_text=("Write a follow-up email after a sales call about our SaaS product."),
                         expected_output="Thank you for taking the time...",
                         expected_topics=["follow-up", "meeting", "next steps"],
                     ),
@@ -121,9 +115,7 @@ class CategoryRegistry:
                     TaskExample(
                         name="policy_qa",
                         input_text="What is the return policy for electronics?",
-                        expected_output=(
-                            "Electronics can be returned within 30 days with original receipt."
-                        ),
+                        expected_output=("Electronics can be returned within 30 days with original receipt."),
                         expected_topics=["return", "days", "receipt"],
                         context=(
                             "Our return policy: Electronics 30 days with receipt. "
@@ -141,8 +133,7 @@ class CategoryRegistry:
                         name="market_analysis",
                         input_text=("Analyze the competitive landscape for AI coding assistants."),
                         expected_output=(
-                            "The AI coding assistant market features "
-                            "GitHub Copilot, Cursor, and Claude Code..."
+                            "The AI coding assistant market features GitHub Copilot, Cursor, and Claude Code..."
                         ),
                         expected_topics=["competitors", "market", "trends"],
                     ),
@@ -157,8 +148,7 @@ class CategoryRegistry:
                         name="csv_to_json",
                         input_text="name,age,city\nAlice,30,NYC\nBob,25,LA",
                         expected_output=(
-                            '[{"name": "Alice", "age": 30, "city": "NYC"}, '
-                            '{"name": "Bob", "age": 25, "city": "LA"}]'
+                            '[{"name": "Alice", "age": 30, "city": "NYC"}, {"name": "Bob", "age": 25, "city": "LA"}]'
                         ),
                         expected_topics=["name", "age", "city"],
                     ),

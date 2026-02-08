@@ -86,12 +86,8 @@ class BenchmarkRunner:
 
         for task in tasks:
             for pattern in patterns:
-                variables = task.get("variables", {}).get(
-                    pattern.name, task.get("default_variables", {})
-                )
-                mock_output = task.get("mock_outputs", {}).get(
-                    pattern.name, task.get("default_output", "")
-                )
+                variables = task.get("variables", {}).get(pattern.name, task.get("default_variables", {}))
+                mock_output = task.get("mock_outputs", {}).get(pattern.name, task.get("default_output", ""))
 
                 if not variables:
                     continue

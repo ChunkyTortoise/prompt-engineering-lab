@@ -224,9 +224,7 @@ class TestEvaluateAndCompare:
             "What is the return policy for electronics?",
             "How is the battery life?",
         ]
-        result = tester.evaluate_and_compare(
-            outputs_a, outputs_b, queries, name_a="detailed", name_b="brief"
-        )
+        result = tester.evaluate_and_compare(outputs_a, outputs_b, queries, name_a="detailed", name_b="brief")
         assert isinstance(result, ABTestResult)
         assert result.variant_a.n == 2
         assert result.variant_b.n == 2

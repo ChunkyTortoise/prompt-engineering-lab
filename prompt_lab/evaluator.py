@@ -79,11 +79,7 @@ class PromptEvaluator:
         rel = self.relevance(output, query) if query else 0.0
         comp = self.completeness(output, expected_topics or [])
 
-        overall = (
-            w.get("faithfulness", 0.4) * faith
-            + w.get("relevance", 0.4) * rel
-            + w.get("completeness", 0.2) * comp
-        )
+        overall = w.get("faithfulness", 0.4) * faith + w.get("relevance", 0.4) * rel + w.get("completeness", 0.2) * comp
 
         return EvaluationResult(
             faithfulness=round(faith, 4),

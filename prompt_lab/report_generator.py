@@ -12,12 +12,8 @@ class ReportGenerator:
     def benchmark_table(self, report: BenchmarkReport) -> str:
         """Generate a markdown comparison table from benchmark results."""
         lines = ["# Benchmark Results\n"]
-        lines.append(
-            "| Pattern | Task | Faithfulness | Relevance | Completeness | Overall | Latency (ms) |"
-        )
-        lines.append(
-            "|---------|------|--------------|-----------|--------------|---------|-------------|"
-        )
+        lines.append("| Pattern | Task | Faithfulness | Relevance | Completeness | Overall | Latency (ms) |")
+        lines.append("|---------|------|--------------|-----------|--------------|---------|-------------|")
 
         for r in report.results:
             lines.append(
@@ -27,9 +23,7 @@ class ReportGenerator:
                 f"{r.latency_ms:.1f} |"
             )
 
-        lines.append(
-            f"\n**Best Pattern**: {report.best_pattern} (overall: {report.best_overall:.4f})"
-        )
+        lines.append(f"\n**Best Pattern**: {report.best_pattern} (overall: {report.best_overall:.4f})")
         return "\n".join(lines)
 
     def summary_table(self, report: BenchmarkReport) -> str:

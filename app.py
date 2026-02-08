@@ -46,17 +46,13 @@ def main():
     with tab_evaluate:
         st.subheader("Evaluate Prompt Output")
         query = st.text_area("Query/Input:", "What is the return policy?")
-        context = st.text_area(
-            "Context:", "Return policy: 30 days for electronics, 60 days for clothing."
-        )
+        context = st.text_area("Context:", "Return policy: 30 days for electronics, 60 days for clothing.")
         output = st.text_area("LLM Output:", "Electronics can be returned within 30 days.")
         topics = st.text_input("Expected Topics (comma-separated):", "return, days, electronics")
 
         if st.button("Evaluate"):
             topic_list = [t.strip() for t in topics.split(",") if t.strip()]
-            result = evaluator.evaluate(
-                output, query=query, context=context, expected_topics=topic_list
-            )
+            result = evaluator.evaluate(output, query=query, context=context, expected_topics=topic_list)
             col1, col2, col3, col4 = st.columns(4)
             col1.metric("Faithfulness", f"{result.faithfulness:.2%}")
             col2.metric("Relevance", f"{result.relevance:.2%}")

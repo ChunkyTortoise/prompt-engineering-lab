@@ -48,17 +48,12 @@ class PatternLibrary:
                 name="chain_of_thought",
                 description="Step-by-step reasoning for complex problems",
                 template=(
-                    "Think through this step by step.\n\n"
-                    "Problem: {{problem}}\n\n"
-                    "Let's work through this:\nStep 1:"
+                    "Think through this step by step.\n\nProblem: {{problem}}\n\nLet's work through this:\nStep 1:"
                 ),
                 variables=["problem"],
                 tags=["reasoning", "analysis"],
                 example_input={
-                    "problem": (
-                        "If a store has 3 shelves with 8 items each, "
-                        "and 5 items are sold, how many remain?"
-                    )
+                    "problem": ("If a store has 3 shelves with 8 items each, and 5 items are sold, how many remain?")
                 },
                 example_output=(
                     "Step 1: Calculate total items: 3 x 8 = 24\n"
@@ -69,15 +64,11 @@ class PatternLibrary:
             PromptPattern(
                 name="few_shot",
                 description="Learning from examples before the actual task",
-                template=(
-                    "Here are some examples:\n\n{{examples}}\n\nNow do the same for:\n{{input}}"
-                ),
+                template=("Here are some examples:\n\n{{examples}}\n\nNow do the same for:\n{{input}}"),
                 variables=["examples", "input"],
                 tags=["learning", "examples"],
                 example_input={
-                    "examples": (
-                        "Input: happy -> Output: positive\nInput: angry -> Output: negative"
-                    ),
+                    "examples": ("Input: happy -> Output: positive\nInput: angry -> Output: negative"),
                     "input": "excited",
                 },
                 example_output="positive",
@@ -85,9 +76,7 @@ class PatternLibrary:
             PromptPattern(
                 name="structured_output",
                 description="Request output in a specific format (JSON, table, etc.)",
-                template=(
-                    "{{task}}\n\nRespond in the following format:\n{{format}}\n\nInput: {{input}}"
-                ),
+                template=("{{task}}\n\nRespond in the following format:\n{{format}}\n\nInput: {{input}}"),
                 variables=["task", "format", "input"],
                 tags=["formatting", "structured"],
                 example_input={
@@ -95,9 +84,7 @@ class PatternLibrary:
                     "format": '{"name": "...", "email": "...", "phone": "..."}',
                     "input": "John Smith, jsmith@example.com, 555-0100",
                 },
-                example_output=(
-                    '{"name": "John Smith", "email": "jsmith@example.com", "phone": "555-0100"}'
-                ),
+                example_output=('{"name": "John Smith", "email": "jsmith@example.com", "phone": "555-0100"}'),
             ),
             PromptPattern(
                 name="role_play",
@@ -148,10 +135,7 @@ class PatternLibrary:
                     "question": "Is a tomato a fruit or vegetable?",
                 },
                 example_output=(
-                    "Attempt 1: Fruit (botanically)\n"
-                    "Attempt 2: Fruit\n"
-                    "Attempt 3: Fruit (berry)\n"
-                    "Consensus: Fruit"
+                    "Attempt 1: Fruit (botanically)\nAttempt 2: Fruit\nAttempt 3: Fruit (berry)\nConsensus: Fruit"
                 ),
             ),
             PromptPattern(
@@ -165,10 +149,7 @@ class PatternLibrary:
                 variables=["context", "question"],
                 tags=["retrieval", "grounding"],
                 example_input={
-                    "context": (
-                        "The Eiffel Tower was built in 1889 for the World's Fair. "
-                        "It is 330 meters tall."
-                    ),
+                    "context": ("The Eiffel Tower was built in 1889 for the World's Fair. It is 330 meters tall."),
                     "question": "When was the Eiffel Tower built?",
                 },
                 example_output="The Eiffel Tower was built in 1889 for the World's Fair.",
@@ -185,11 +166,7 @@ class PatternLibrary:
                 tags=["decomposition", "planning"],
                 example_input={"task": "Plan a company offsite for 50 people"},
                 example_output=(
-                    "1. Determine budget\n"
-                    "2. Choose dates\n"
-                    "3. Find venue\n"
-                    "4. Plan activities\n"
-                    "5. Arrange catering"
+                    "1. Determine budget\n2. Choose dates\n3. Find venue\n4. Plan activities\n5. Arrange catering"
                 ),
             ),
         ]

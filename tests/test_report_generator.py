@@ -11,12 +11,8 @@ from prompt_lab.report_generator import ReportGenerator
 def _make_report():
     runner = BenchmarkRunner()
     patterns = [
-        PromptPattern(
-            name="alpha", description="A", template="Solve: {{problem}}", variables=["problem"]
-        ),
-        PromptPattern(
-            name="beta", description="B", template="Solve: {{problem}}", variables=["problem"]
-        ),
+        PromptPattern(name="alpha", description="A", template="Solve: {{problem}}", variables=["problem"]),
+        PromptPattern(name="beta", description="B", template="Solve: {{problem}}", variables=["problem"]),
     ]
     tasks = [
         {
