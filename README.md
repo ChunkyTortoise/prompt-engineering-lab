@@ -5,9 +5,19 @@
 A comprehensive Python toolkit for prompt engineering techniques — template management, patterns (CoT, few-shot, role-play), optimization, A/B testing, token counting, and cost estimation.
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ct-prompt-lab.streamlit.app)
-![Tests](https://img.shields.io/badge/tests-66%2B%20passing-brightgreen)
+![Tests](https://img.shields.io/badge/tests-190%2B%20passing-brightgreen)
 ![Python](https://img.shields.io/badge/python-3.11%2B-blue)
 ![License](https://img.shields.io/badge/license-MIT-blue)
+
+## What This Solves
+
+- **Prompt iteration loops** — Create, test, and compare prompts without manual copy/paste
+- **Cost uncertainty** — Estimate tokens and compare provider costs before deployment
+- **Quality drift** — A/B testing and optimization to validate prompt changes
+
+## Demo
+
+Live demo: https://ct-prompt-lab.streamlit.app
 
 ## Features
 
@@ -18,6 +28,36 @@ A comprehensive Python toolkit for prompt engineering techniques — template ma
 - **Token Counting**: Estimate token usage across Claude, OpenAI, and Gemini
 - **Cost Calculation**: Calculate and compare costs across different AI providers and models
 - **CLI Tool**: Command-line interface for quick prompt engineering workflows
+
+## Architecture
+
+```mermaid
+flowchart LR
+    PT[Prompt Templates] --> OPT[Optimizer]
+    OPT --> AB[A/B Testing Engine]
+    AB --> TC[Token Counter]
+    TC --> SC[Safety Checker]
+    SC --> VS[Versioning System]
+    VS --> SD[Streamlit Demo]
+
+    PT -->|Variables & Chains| OPT
+    OPT -->|Mutation & Search| AB
+    AB -->|Z-test p<0.05| TC
+    TC -->|Claude/OpenAI/Gemini| SC
+    SC -->|Injection & PII| VS
+    VS -->|Hash + Metadata| SD
+```
+
+## Key Metrics
+
+| Metric | Value |
+|--------|-------|
+| Tests | 190+ passing |
+| Prompt Optimization | Random search + mutation strategies |
+| A/B Testing | Z-test significance at p<0.05, Cohen's d effect size |
+| Token Counting | Multi-provider (Claude, OpenAI, Gemini) |
+| Safety Checking | Injection detection, PII masking, content policy |
+| Version Control | Git-inspired hash + metadata, rollback, changelog |
 
 ## Installation
 
@@ -138,7 +178,7 @@ make clean
 
 ## Testing
 
-The project includes 66+ comprehensive tests covering all modules:
+The project includes 190+ comprehensive tests covering all modules:
 
 - **Template tests** (12): Template formatting, chaining, registry
 - **Pattern tests** (14): CoT, few-shot, role-play, self-refine
@@ -182,6 +222,18 @@ prompt-engineering-lab/
 ├── requirements-dev.txt      # Development dependencies
 └── README.md                 # This file
 ```
+
+## Service Mapping
+
+- Service 5: Prompt Engineering and System Optimization
+- Service 6: AI-Powered Personal and Business Automation
+
+## Certification Mapping
+
+- Vanderbilt Prompt Engineering for ChatGPT
+- Vanderbilt ChatGPT Personal Automation
+- IBM Generative AI Engineering with PyTorch, LangChain & Hugging Face
+- Google Cloud Generative AI Leader Certificate
 
 ## Examples
 
