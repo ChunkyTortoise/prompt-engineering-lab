@@ -2,7 +2,13 @@
 
 from __future__ import annotations
 
-from prompt_engineering_lab.patterns import ChainOfThought, FewShotPattern, MetaPromptPattern, RolePlayPattern, SelfRefinePattern
+from prompt_engineering_lab.patterns import (
+    ChainOfThought,
+    FewShotPattern,
+    MetaPromptPattern,
+    RolePlayPattern,
+    SelfRefinePattern,
+)
 
 
 class TestChainOfThought:

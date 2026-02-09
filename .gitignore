@@ -48,3 +48,11 @@ Thumbs.db
 
 # Ruff
 .ruff_cache/
+
+# Added by deep clean
+.hypothesis/
+coverage.xml
+.mypy_cache/
+.env.local
+.env.*.local
+*.log
