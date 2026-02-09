@@ -157,6 +157,18 @@ pel count "Your prompt text" -p claude
 - Pricing data for Claude (Opus/Sonnet/Haiku), OpenAI (GPT-4/3.5), Gemini (Pro/Ultra)
 - Compare providers to find the most cost-effective option
 
+## Architecture Decisions
+
+| ADR | Title | Status |
+|-----|-------|--------|
+| [ADR-0001](docs/adr/0001-prompt-versioning-strategy.md) | Prompt Versioning Strategy | Accepted |
+| [ADR-0002](docs/adr/0002-ab-testing-framework.md) | A/B Testing Framework | Accepted |
+| [ADR-0003](docs/adr/0003-safety-checker-design.md) | Safety Checker Design | Accepted |
+
+## Benchmarks
+
+See [BENCHMARKS.md](BENCHMARKS.md) for methodology, evaluation metrics, and reproduction steps.
+
 ## Development
 
 ```bash
@@ -301,6 +313,10 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 3. Commit your changes (`git commit -m 'Add amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for release history.
 
 ## License
 
