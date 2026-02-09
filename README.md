@@ -318,6 +318,13 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 See [CHANGELOG.md](CHANGELOG.md) for release history.
 
+## Related Projects
+
+- [EnterpriseHub](https://github.com/ChunkyTortoise/EnterpriseHub) -- Real estate AI platform with BI dashboards and CRM integration
+- [docqa-engine](https://github.com/ChunkyTortoise/docqa-engine) -- RAG document Q&A with hybrid retrieval and prompt engineering lab
+- [ai-orchestrator](https://github.com/ChunkyTortoise/ai-orchestrator) -- AgentForge: unified async LLM interface (Claude, Gemini, OpenAI, Perplexity)
+- [Portfolio](https://chunkytortoise.github.io) -- Project showcase and services
+
 ## License
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE) file for details.
@@ -330,4 +337,4 @@ This project is licensed under the MIT License. See [LICENSE](LICENSE) file for 
 
 - Inspired by modern prompt engineering research and best practices
 - Built with Python 3.11+ and Click for CLI functionality
-- Follows test-driven development with 66+ comprehensive tests
+- Follows test-driven development with 190+ comprehensive tests
