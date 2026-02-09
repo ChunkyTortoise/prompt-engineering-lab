@@ -2,6 +2,7 @@
 
 A comprehensive Python toolkit for prompt engineering techniques — template management, patterns (CoT, few-shot, role-play), optimization, A/B testing, token counting, and cost estimation.
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ct-prompt-lab.streamlit.app)
 ![Tests](https://img.shields.io/badge/tests-66%2B%20passing-brightgreen)
 ![Python](https://img.shields.io/badge/python-3.11%2B-blue)
 ![License](https://img.shields.io/badge/license-MIT-blue)
