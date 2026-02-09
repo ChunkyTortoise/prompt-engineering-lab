@@ -1,3 +1,5 @@
+[![Sponsor](https://img.shields.io/badge/Sponsor-💖-pink.svg)](https://github.com/sponsors/ChunkyTortoise)
+
 # Prompt Engineering Lab
 
 A comprehensive Python toolkit for prompt engineering techniques — template management, patterns (CoT, few-shot, role-play), optimization, A/B testing, token counting, and cost estimation.
