@@ -50,7 +50,9 @@ class TestCLI:
     def test_enhance_command_role(self):
         """Test enhance command with role pattern."""
         runner = CliRunner()
-        result = runner.invoke(cli, ["enhance", "Write code", "-p", "role", "--role", "developer", "--expertise", "Python"])
+        result = runner.invoke(
+            cli, ["enhance", "Write code", "-p", "role", "--role", "developer", "--expertise", "Python"]
+        )
         assert result.exit_code == 0
         assert "developer" in result.output
         assert "Python" in result.output

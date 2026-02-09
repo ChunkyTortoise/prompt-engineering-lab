@@ -29,7 +29,7 @@ class TestTokenCounter:
         text = "This is a test" * 10
         claude_tokens = counter.count(text, "claude")
         openai_tokens = counter.count(text, "openai")
-        gemini_tokens = counter.count(text, "gemini")
+        _gemini_tokens = counter.count(text, "gemini")
         # Claude should have more tokens (lower chars per token)
         assert claude_tokens >= openai_tokens
 
